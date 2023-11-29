@@ -20,9 +20,9 @@ target/
 *.ipr
 
 
-### creds ###
-src/main/resources/application.properties
 
+### creds ###
+*.properties
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
