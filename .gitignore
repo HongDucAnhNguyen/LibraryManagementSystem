@@ -22,7 +22,10 @@ target/
 
 
 ### creds ###
-*.properties
+application.properties
+
+
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
