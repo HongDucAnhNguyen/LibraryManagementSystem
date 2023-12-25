@@ -1,15 +1,11 @@
-package com.LibManagementSystem.LibManagementSystem.DTO;
+package com.LibManagementSystem.LibManagementSystem.DTO.responses;
 
 
-import com.LibManagementSystem.LibManagementSystem.models.Token;
-import com.LibManagementSystem.LibManagementSystem.models.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @Builder
@@ -18,5 +14,7 @@ import java.util.List;
 public class AuthResponse {
     @JsonProperty("access_token")
     private String token;
+    @JsonProperty("refresh_token")
+    private String refreshToken;
 
 }

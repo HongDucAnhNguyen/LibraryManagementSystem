@@ -1,7 +1,6 @@
 package com.LibManagementSystem.LibManagementSystem.config;
 
-import com.LibManagementSystem.LibManagementSystem.models.UserRole;
-import jakarta.servlet.Filter;
+import com.LibManagementSystem.LibManagementSystem.models.UserRelated.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +13,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import static org.springframework.security.config.Customizer.withDefaults;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
@@ -35,7 +33,7 @@ public class SecurityConfig {
                             ).permitAll();
 
 
-                            //specify role privileges for content
+                            //everything else is authenticated with role based permissions
                             auth.requestMatchers(new AntPathRequestMatcher("/api/v1/admin/**")).hasRole(
                                     UserRole.ADMIN.name()
                             );

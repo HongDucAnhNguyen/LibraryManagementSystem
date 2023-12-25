@@ -1,7 +1,6 @@
-package com.LibManagementSystem.LibManagementSystem.models;
+package com.LibManagementSystem.LibManagementSystem.models.JwtTokenRelated;
 
-import com.LibManagementSystem.LibManagementSystem.models.TokenType;
-import com.LibManagementSystem.LibManagementSystem.models.User;
+import com.LibManagementSystem.LibManagementSystem.models.UserRelated.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

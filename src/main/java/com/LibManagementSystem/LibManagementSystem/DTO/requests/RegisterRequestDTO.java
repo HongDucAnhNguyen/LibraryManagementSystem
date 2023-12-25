@@ -1,4 +1,4 @@
-package com.LibManagementSystem.LibManagementSystem.DTO;
+package com.LibManagementSystem.LibManagementSystem.DTO.requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginRequestDTO {
+public class RegisterRequestDTO {
+    private String firstname;
+    private String lastname;
     private String email;
     private String password;
 }
-

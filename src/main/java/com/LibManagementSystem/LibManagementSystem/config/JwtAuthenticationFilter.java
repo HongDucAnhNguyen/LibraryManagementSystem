@@ -1,7 +1,7 @@
 package com.LibManagementSystem.LibManagementSystem.config;
 
 import com.LibManagementSystem.LibManagementSystem.repo.TokenRepo;
-import com.LibManagementSystem.LibManagementSystem.service.JwtService;
+import com.LibManagementSystem.LibManagementSystem.service.AuthManagementService.JwtService;
 import jakarta.annotation.Nonnull;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

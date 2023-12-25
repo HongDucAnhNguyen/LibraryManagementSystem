@@ -1,7 +1,7 @@
 package com.LibManagementSystem.LibManagementSystem;
 
-import com.LibManagementSystem.LibManagementSystem.models.User;
-import com.LibManagementSystem.LibManagementSystem.models.UserRole;
+import com.LibManagementSystem.LibManagementSystem.models.UserRelated.User;
+import com.LibManagementSystem.LibManagementSystem.models.UserRelated.UserRole;
 import com.LibManagementSystem.LibManagementSystem.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;

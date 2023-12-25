@@ -1,4 +1,4 @@
-package com.LibManagementSystem.LibManagementSystem.service;
+package com.LibManagementSystem.LibManagementSystem.service.AuthManagementService;
 
 import com.LibManagementSystem.LibManagementSystem.repo.TokenRepo;
 import jakarta.servlet.http.HttpServletRequest;

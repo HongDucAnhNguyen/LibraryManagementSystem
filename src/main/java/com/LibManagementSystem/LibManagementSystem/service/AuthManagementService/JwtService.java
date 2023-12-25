@@ -1,6 +1,6 @@
-package com.LibManagementSystem.LibManagementSystem.service;
+package com.LibManagementSystem.LibManagementSystem.service.AuthManagementService;
 
-import com.LibManagementSystem.LibManagementSystem.models.User;
+import com.LibManagementSystem.LibManagementSystem.models.UserRelated.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -29,6 +29,14 @@ private long tokenLifeSpan;
         return structureToken(user);
 
     }
+
+    public String generateRefreshToken(User user){
+        return Jwts.builder().setClaims(new HashMap<>()).setSubject(user.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis())).
+                setExpiration(new Date(System.currentTimeMillis() + 604800000 )).signWith(getSignInKey(),
+                        SignatureAlgorithm.HS256).compact();
+    }
+
 
     private String structureToken(User user) {
         return Jwts.builder().setClaims(new HashMap<>()).setSubject(user.getUsername())

@@ -1,11 +1,10 @@
 package com.LibManagementSystem.LibManagementSystem.repo;
 
-import com.LibManagementSystem.LibManagementSystem.models.User;
+import com.LibManagementSystem.LibManagementSystem.models.UserRelated.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
-import java.util.UUID;
 
 
 @Repository
