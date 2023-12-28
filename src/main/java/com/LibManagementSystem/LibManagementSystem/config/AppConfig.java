@@ -19,7 +19,7 @@ public class AppConfig {
 
     private final UserRepo userRepo;
 
-    //write it like this so i dont have to create an implementation class of UserDetailsService
+    //writing it like this so i dont have to create an implementation class of UserDetailsService
     @Bean
     public UserDetailsService userDetailsService() {
         return userEmail -> userRepo.findByEmail(userEmail).orElseThrow(() ->
