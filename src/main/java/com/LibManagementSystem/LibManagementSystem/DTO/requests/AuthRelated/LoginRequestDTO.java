@@ -1,4 +1,4 @@
-package com.LibManagementSystem.LibManagementSystem.DTO.requests;
+package com.LibManagementSystem.LibManagementSystem.DTO.requests.AuthRelated;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

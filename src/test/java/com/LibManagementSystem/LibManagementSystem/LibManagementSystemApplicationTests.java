@@ -8,6 +8,7 @@ class LibManagementSystemApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.LibManagementSystem.LibManagementSystem.DTO.requests;
+package com.LibManagementSystem.LibManagementSystem.DTO.requests.BookRelated;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,4 +14,5 @@ public class AddBookRequestDTO {
     private String bookName;
     private String bookAuthor;
     private String bookGenre;
+    private Integer publishedYear;
 }

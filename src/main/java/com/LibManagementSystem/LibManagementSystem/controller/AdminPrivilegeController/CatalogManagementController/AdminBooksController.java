@@ -1,9 +1,9 @@
 package com.LibManagementSystem.LibManagementSystem.controller.AdminPrivilegeController.CatalogManagementController;
 
-import com.LibManagementSystem.LibManagementSystem.DTO.requests.AddBookRequestDTO;
+import com.LibManagementSystem.LibManagementSystem.DTO.requests.BookRelated.AddBookRequestDTO;
+import com.LibManagementSystem.LibManagementSystem.DTO.requests.BookRelated.UpdateBookRequestDTO;
 import com.LibManagementSystem.LibManagementSystem.models.BookRelated.Book;
-import com.LibManagementSystem.LibManagementSystem.service.AdminPrivilegeService.CatalogManagementService.AdminBooksService;
-import com.LibManagementSystem.LibManagementSystem.service.AuthManagementService.AuthService;
+import com.LibManagementSystem.LibManagementSystem.service.AuthManagementService.AdminPrivilegeService.CatalogManagementService.AdminBooksService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,17 +23,33 @@ public class AdminBooksController {
     }
 //add a new book to library
 
+
+
+    /*replace book with DTOs*/
+
     @PostMapping(path = "/new-book")
     public ResponseEntity<Book> addBookToLib(@RequestBody @NonNull AddBookRequestDTO newBookBody) {
         return ResponseEntity.ok(booksService.addBookService(newBookBody));
 
     }
-// update book details in library
-    /*location of book, category*/
 
-    //remove book from library
+    // update book details in library
+    /*location of book, category*/
+    @PutMapping(path = "/update-book/{bookId}")
+    public ResponseEntity<Book> updateBookInLib(@RequestBody @NonNull UpdateBookRequestDTO updateData, @PathVariable Integer bookId) {
+        return ResponseEntity.ok(booksService.updateBookService(updateData, bookId));
+
+    }
+
+    // remove book from library
+    @DeleteMapping(path = "/remove-book/{bookId}")
+    public ResponseEntity<String> removeBookFromLib(@PathVariable Integer bookId) {
+        return ResponseEntity.ok(booksService.removeBookService(bookId));
+
+    }
 
     //handle user renewal request for book
+
 
 
 

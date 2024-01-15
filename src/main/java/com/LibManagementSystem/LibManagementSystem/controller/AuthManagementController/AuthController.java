@@ -1,8 +1,8 @@
 package com.LibManagementSystem.LibManagementSystem.controller.AuthManagementController;
 
 import com.LibManagementSystem.LibManagementSystem.DTO.responses.AuthResponse;
-import com.LibManagementSystem.LibManagementSystem.DTO.requests.LoginRequestDTO;
-import com.LibManagementSystem.LibManagementSystem.DTO.requests.RegisterRequestDTO;
+import com.LibManagementSystem.LibManagementSystem.DTO.requests.AuthRelated.LoginRequestDTO;
+import com.LibManagementSystem.LibManagementSystem.DTO.requests.AuthRelated.RegisterRequestDTO;
 import com.LibManagementSystem.LibManagementSystem.service.AuthManagementService.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

@@ -19,21 +19,26 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-/*TODO: implement refresh token*/
-@Value("${application.env.jwt.secret-key}")
+
+    @Value("${application.env.jwt.secret-key}")
     private String SECRET_KEY;
 
-@Value("${application.env.jwt.life-span}")
-private long tokenLifeSpan;
-    public String generateToken(User user){
+    @Value("${application.env.jwt.life-span}")
+    private long tokenLifeSpan;
+
+
+    @Value("${application.env.jwt.refresh-life-span}")
+    private Long refreshTokenLifeSpan;
+
+    public String generateToken(User user) {
         return structureToken(user);
 
     }
 
-    public String generateRefreshToken(User user){
+    public String generateRefreshToken(User user) {
         return Jwts.builder().setClaims(new HashMap<>()).setSubject(user.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis())).
-                setExpiration(new Date(System.currentTimeMillis() + 604800000 )).signWith(getSignInKey(),
+                setExpiration(new Date(System.currentTimeMillis() + refreshTokenLifeSpan)).signWith(getSignInKey(),
                         SignatureAlgorithm.HS256).compact();
     }
 
@@ -41,7 +46,7 @@ private long tokenLifeSpan;
     private String structureToken(User user) {
         return Jwts.builder().setClaims(new HashMap<>()).setSubject(user.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis())).
-                setExpiration(new Date(System.currentTimeMillis() + tokenLifeSpan )).signWith(getSignInKey(),
+                setExpiration(new Date(System.currentTimeMillis() + tokenLifeSpan)).signWith(getSignInKey(),
                         SignatureAlgorithm.HS256).compact();
     }
 
@@ -61,10 +66,12 @@ private long tokenLifeSpan;
                 setSigningKey(getSignInKey()).
                 build().parseClaimsJws(token).getBody();
     }
+
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String userEmail = extractUserEmail(token);
         return (userEmail.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
+
     private boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }

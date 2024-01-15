@@ -1,8 +1,8 @@
 package com.LibManagementSystem.LibManagementSystem.service.AuthManagementService;
 
 import com.LibManagementSystem.LibManagementSystem.DTO.responses.AuthResponse;
-import com.LibManagementSystem.LibManagementSystem.DTO.requests.LoginRequestDTO;
-import com.LibManagementSystem.LibManagementSystem.DTO.requests.RegisterRequestDTO;
+import com.LibManagementSystem.LibManagementSystem.DTO.requests.AuthRelated.LoginRequestDTO;
+import com.LibManagementSystem.LibManagementSystem.DTO.requests.AuthRelated.RegisterRequestDTO;
 import com.LibManagementSystem.LibManagementSystem.models.JwtTokenRelated.Token;
 import com.LibManagementSystem.LibManagementSystem.models.JwtTokenRelated.TokenType;
 import com.LibManagementSystem.LibManagementSystem.models.UserRelated.User;
@@ -60,7 +60,7 @@ public class AuthService {
                 .lastName(request.getLastname())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .userRole(UserRole.USER).build();
+                .userRole(UserRole.USER).userEnabled(true).build();
         userRepo.save(user);
 
         String jwtToken = jwtService.generateToken(user);

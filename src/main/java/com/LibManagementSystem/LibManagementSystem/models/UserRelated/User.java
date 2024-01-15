@@ -16,7 +16,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="_user")
+@Table(name = "_user")
 public class User implements UserDetails {
 
     @Id
@@ -27,6 +27,8 @@ public class User implements UserDetails {
     @Column(unique = true, nullable = false)
     private String email;
 
+
+    private boolean userEnabled;
 
     @Column(nullable = false)
     private String firstName;
@@ -50,10 +52,12 @@ public class User implements UserDetails {
     public String getUsername() {
         return this.email;
     }
+
     @Override
     public String getPassword() {
         return this.password;
     }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -61,7 +65,15 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+//        if (this.userEnabled == true) {
+//
+//            return true;
+//        }
+//        if (this.userEnabled == false) {
+//            return false;
+//        }
+        return this.userEnabled;
+
     }
 
     @Override
@@ -71,6 +83,13 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+//        if (this.userEnabled == true) {
+//
+//            return true;
+//        }
+//        if (this.userEnabled == false) {
+//            return false;
+//        }
+        return this.userEnabled;
     }
 }

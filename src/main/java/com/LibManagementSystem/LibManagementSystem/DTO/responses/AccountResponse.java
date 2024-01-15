@@ -18,8 +18,6 @@ public class AccountResponse {
 
     private String accountName;
 
-
-
     @JsonProperty("account_res_message")
     private String resMessage;
 

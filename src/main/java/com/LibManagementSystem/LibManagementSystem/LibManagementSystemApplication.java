@@ -13,33 +13,33 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @SpringBootApplication
 public class LibManagementSystemApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(LibManagementSystemApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(LibManagementSystemApplication.class, args);
+    }
 
 
-	@Value("${application.env.creds.admin-email}")
-	private String ADMIN_EMAIL;
+    @Value("${application.env.creds.admin-email}")
+    private String ADMIN_EMAIL;
 
-	@Value("${application.env.creds.admin-pass}")
-	private String ADMIN_PASSWORD;
-	//admin user
+    @Value("${application.env.creds.admin-pass}")
+    private String ADMIN_PASSWORD;
+    //admin user
 
-	@Bean
-	CommandLineRunner run(UserRepo userRepo, PasswordEncoder passwordEncoder){
-		return args ->{
-			if(userRepo.findByEmail(ADMIN_EMAIL).isPresent()){
+    @Bean
+    CommandLineRunner run(UserRepo userRepo, PasswordEncoder passwordEncoder) {
+        return args -> {
+            if (userRepo.findByEmail(ADMIN_EMAIL).isPresent()) {
 
-				return;
-			}
+                return;
+            }
 
 
-			User admin = User.builder().firstName("admin")
-					.lastName("user")
-					.email(ADMIN_EMAIL)
-					.password(passwordEncoder.encode(ADMIN_PASSWORD))
-					.userRole(UserRole.ADMIN).build();
-			userRepo.save(admin);
-		};
-	}
+            User admin =
+
+                    User.builder().firstName("admin").lastName("user").
+                            email(ADMIN_EMAIL).password(passwordEncoder.encode(ADMIN_PASSWORD)).
+                            userRole(UserRole.ADMIN).userEnabled(true).build();
+            userRepo.save(admin);
+        };
+    }
 }

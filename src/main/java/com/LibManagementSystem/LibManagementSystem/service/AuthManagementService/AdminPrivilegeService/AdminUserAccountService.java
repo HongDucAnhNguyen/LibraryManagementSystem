@@ -1,5 +1,6 @@
-package com.LibManagementSystem.LibManagementSystem.service.AdminPrivilegeService;
+package com.LibManagementSystem.LibManagementSystem.service.AuthManagementService.AdminPrivilegeService;
 
+import com.LibManagementSystem.LibManagementSystem.DTO.responses.GetOneUserResponse;
 import com.LibManagementSystem.LibManagementSystem.models.JwtTokenRelated.Token;
 import com.LibManagementSystem.LibManagementSystem.models.UserRelated.User;
 import com.LibManagementSystem.LibManagementSystem.models.UserRelated.UserRole;
@@ -40,11 +41,26 @@ public class AdminUserAccountService {
         return "deletion successful";
     }
 
-    public Optional<User> getUserByIdService(Integer userId) {
+    public GetOneUserResponse getUserByIdService(Integer userId) {
 
 
-        return userRepo.findById(userId);
+        User userRetrieved =  userRepo.findById(userId).orElseThrow();
 
+        if (userRetrieved == null){
+            throw new NullPointerException();
+        }
+
+        return GetOneUserResponse.builder().email(userRetrieved.getEmail()).userEnabled(userRetrieved.isEnabled()).firstName(
+                userRetrieved.getFirstName()
+        ).lastName(userRetrieved.getLastName()).build();
     }
 
+    public void disableUserAccountService(Integer userId) {
+
+        User userRetrieved = userRepo.findById(userId).orElseThrow();
+        userRetrieved.setUserEnabled(false);
+        userRepo.save(userRetrieved);
+
+
+    }
 }
