@@ -2,6 +2,7 @@ package com.LibManagementSystem.LibManagementSystem.controller.AdminPrivilegeCon
 
 import com.LibManagementSystem.LibManagementSystem.DTO.requests.BookRelated.AddBookRequestDTO;
 import com.LibManagementSystem.LibManagementSystem.DTO.requests.BookRelated.UpdateBookRequestDTO;
+import com.LibManagementSystem.LibManagementSystem.DTO.responses.BookResponse;
 import com.LibManagementSystem.LibManagementSystem.models.BookRelated.Book;
 import com.LibManagementSystem.LibManagementSystem.service.AuthManagementService.AdminPrivilegeService.CatalogManagementService.AdminBooksService;
 import lombok.NonNull;
@@ -28,7 +29,7 @@ public class AdminBooksController {
     /*replace book with DTOs*/
 
     @PostMapping(path = "/new-book")
-    public ResponseEntity<Book> addBookToLib(@RequestBody @NonNull AddBookRequestDTO newBookBody) {
+    public ResponseEntity<BookResponse> addBookToLib(@RequestBody @NonNull AddBookRequestDTO newBookBody) {
         return ResponseEntity.ok(booksService.addBookService(newBookBody));
 
     }
@@ -36,14 +37,14 @@ public class AdminBooksController {
     // update book details in library
     /*location of book, category*/
     @PutMapping(path = "/update-book/{bookId}")
-    public ResponseEntity<Book> updateBookInLib(@RequestBody @NonNull UpdateBookRequestDTO updateData, @PathVariable Integer bookId) {
+    public ResponseEntity<BookResponse> updateBookInLib(@RequestBody @NonNull UpdateBookRequestDTO updateData, @PathVariable Integer bookId) {
         return ResponseEntity.ok(booksService.updateBookService(updateData, bookId));
 
     }
 
     // remove book from library
     @DeleteMapping(path = "/remove-book/{bookId}")
-    public ResponseEntity<String> removeBookFromLib(@PathVariable Integer bookId) {
+    public ResponseEntity<BookResponse> removeBookFromLib(@PathVariable Integer bookId) {
         return ResponseEntity.ok(booksService.removeBookService(bookId));
 
     }

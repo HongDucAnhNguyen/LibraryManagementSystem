@@ -24,7 +24,6 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-
 public class CirculationService {
 
     private final BookRepo bookRepo;
@@ -57,7 +56,19 @@ public class CirculationService {
 
     public BookResponse borrowBookService(Integer bookId) {
 
+
+
+
         Book bookFound = bookRepo.findById(bookId).orElseThrow();
+
+
+        if(bookFound.getBookStatus().equals(BookStatus.BORROWED)){
+
+            return BookResponse.builder().responseMessage("book is already borrowed").build();
+
+        }
+
+
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User userFound = (User) authentication.getPrincipal();
@@ -82,15 +93,18 @@ public class CirculationService {
 
         return BookResponse.builder().bookAuthor(bookFound.getBookAuthor())
                 .bookGenre(bookFound.getBookGenre()).bookISBN(bookFound.getBookISBN()).bookName(bookFound.getBookName())
-                .publishedYear(bookFound.getPublishedYear()).bookStatus(bookFound.getBookStatus()).build();
+                .publishedYear(bookFound.getPublishedYear()).bookStatus(bookFound.getBookStatus()).responseMessage("book borrowed").build();
     }
 
     public List<BookResponse> returnBookService(Integer bookId, List<Book> listOfBooksReturned) {
 
         List<BookResponse> listOfBooksReturnedResponse = new ArrayList<>();
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User userFound = (User) authentication.getPrincipal();
+
         listOfBooksReturned.forEach(book -> {
-            borrowedStatus issueEntryFound = issueEntryRepo.findByBookIdAndUserId();
+            borrowedStatus issueEntryFound = issueEntryRepo.findByBookIdAndUserId(bookId, userFound.getUserId());
             Book bookFound = bookRepo.findById(bookId).orElseThrow();
             LocalDate currentDate = LocalDate.now();
             if (currentDate.compareTo(issueEntryFound.getExpectedReturnDate()) > 0) {
@@ -107,7 +121,7 @@ public class CirculationService {
 
             BookResponse bookReturnedResponseObj = BookResponse.builder().bookAuthor(bookFound.getBookAuthor())
                     .bookGenre(bookFound.getBookGenre()).bookISBN(bookFound.getBookISBN()).bookName(bookFound.getBookName())
-                    .publishedYear(bookFound.getPublishedYear()).bookStatus(bookFound.getBookStatus()).build();
+                    .publishedYear(bookFound.getPublishedYear()).bookStatus(bookFound.getBookStatus()).responseMessage("book returned").build();
 
 
             listOfBooksReturnedResponse.add(bookReturnedResponseObj);
