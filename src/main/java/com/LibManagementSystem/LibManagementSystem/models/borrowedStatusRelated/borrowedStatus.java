@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -21,6 +22,8 @@ public class borrowedStatus {
     private Integer issueEntryId; //id of the entry for a book issued to a user
     private Integer userIssuedId;
     private Integer bookIssuedId;
-    private Date issuedTimeStamp;
-    private BorrowedStatusEnum status;
+    private LocalDate issuedTimeStamp;
+    private LocalDate returnedTimeStamp;
+    private LocalDate expectedReturnDate; //2 weeks + issuedtime
+    private boolean isReturnOverdue;
 }

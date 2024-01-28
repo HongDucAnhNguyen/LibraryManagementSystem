@@ -1,6 +1,6 @@
 package com.LibManagementSystem.LibManagementSystem.controller.AdminPrivilegeController;
 
-import com.LibManagementSystem.LibManagementSystem.DTO.responses.GetOneUserResponse;
+import com.LibManagementSystem.LibManagementSystem.DTO.responses.UserResponse;
 
 import com.LibManagementSystem.LibManagementSystem.models.UserRelated.User;
 import com.LibManagementSystem.LibManagementSystem.service.AuthManagementService.AdminPrivilegeService.AdminUserAccountService;
@@ -34,7 +34,7 @@ public class AdminUserAccountsController {
 
     //get a specific user account
     @GetMapping(path = "/{userId}")
-    public ResponseEntity<GetOneUserResponse> getUserById(@PathVariable("userId") Integer userId) {
+    public ResponseEntity<UserResponse> getUserById(@PathVariable("userId") Integer userId) {
         return ResponseEntity.ok(adminUserAccountService.getUserByIdService(userId));
     }
 
@@ -50,9 +50,7 @@ public class AdminUserAccountsController {
     //remove a user account
     @DeleteMapping(path = "remove-account/{userId}")
     public String removeUser(@PathVariable Integer userId) {
-
         adminUserAccountService.removeUserService(userId);
-
         return "removed user";
     }
 

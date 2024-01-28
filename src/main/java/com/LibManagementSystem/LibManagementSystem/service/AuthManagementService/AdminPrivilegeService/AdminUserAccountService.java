@@ -1,6 +1,6 @@
 package com.LibManagementSystem.LibManagementSystem.service.AuthManagementService.AdminPrivilegeService;
 
-import com.LibManagementSystem.LibManagementSystem.DTO.responses.GetOneUserResponse;
+import com.LibManagementSystem.LibManagementSystem.DTO.responses.UserResponse;
 import com.LibManagementSystem.LibManagementSystem.models.JwtTokenRelated.Token;
 import com.LibManagementSystem.LibManagementSystem.models.UserRelated.User;
 import com.LibManagementSystem.LibManagementSystem.models.UserRelated.UserRole;
@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -41,7 +40,7 @@ public class AdminUserAccountService {
         return "deletion successful";
     }
 
-    public GetOneUserResponse getUserByIdService(Integer userId) {
+    public UserResponse getUserByIdService(Integer userId) {
 
 
         User userRetrieved =  userRepo.findById(userId).orElseThrow();
@@ -50,7 +49,7 @@ public class AdminUserAccountService {
             throw new NullPointerException();
         }
 
-        return GetOneUserResponse.builder().email(userRetrieved.getEmail()).userEnabled(userRetrieved.isEnabled()).firstName(
+        return UserResponse.builder().email(userRetrieved.getEmail()).userEnabled(userRetrieved.isEnabled()).firstName(
                 userRetrieved.getFirstName()
         ).lastName(userRetrieved.getLastName()).build();
     }
