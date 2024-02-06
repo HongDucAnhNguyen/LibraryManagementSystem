@@ -13,6 +13,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SpringBootApplication
 public class LibManagementSystemApplication {
 
@@ -36,12 +39,51 @@ public class LibManagementSystemApplication {
                 return;
             }
 
+            List<Book> listOfDefaultBooks = new ArrayList<>();
 
+
+            //page 1
             Book someBook = Book.builder().
                     bookStatus(BookStatus.AVAILABLE).bookGenre("thriller")
-                    .bookAuthor("john doe").bookISBN("asdb234").publishedYear(1980)
+                    .bookAuthor("john doe").bookISBN("123123123").publishedYear(1980)
                     .bookName("adventures of timmy").
                     build();
+
+            Book someBook2 = Book.builder().
+                    bookStatus(BookStatus.AVAILABLE).bookGenre("thriller")
+                    .bookAuthor("john doe").bookISBN("111232323").publishedYear(1980)
+                    .bookName("adventures of timmy").
+                    build();
+            Book someBook3 = Book.builder().
+                    bookStatus(BookStatus.AVAILABLE).bookGenre("thriller")
+                    .bookAuthor("john doe").bookISBN("67856756").publishedYear(1980)
+                    .bookName("adventures of timmy").
+                    build();
+
+
+            //page 2
+            Book someBook4= Book.builder().
+                    bookStatus(BookStatus.AVAILABLE).bookGenre("thriller")
+                    .bookAuthor("john doe").bookISBN("123324132").publishedYear(1980)
+                    .bookName("adventures of timmy").
+                    build();
+            Book someBook5 = Book.builder().
+                    bookStatus(BookStatus.AVAILABLE).bookGenre("thriller")
+                    .bookAuthor("john doe").bookISBN("512453245").publishedYear(1980)
+                    .bookName("adventures of timmy").
+                    build();
+            Book someBook6 = Book.builder().
+                    bookStatus(BookStatus.AVAILABLE).bookGenre("thriller")
+                    .bookAuthor("john doe").bookISBN("346256547346").publishedYear(1980)
+                    .bookName("adventures of timmy").
+                    build();
+
+            listOfDefaultBooks.add(someBook);
+            listOfDefaultBooks.add(someBook2);
+            listOfDefaultBooks.add(someBook3);
+            listOfDefaultBooks.add(someBook4);
+            listOfDefaultBooks.add(someBook5);
+            listOfDefaultBooks.add(someBook6);
 
 
             User admin =
@@ -50,7 +92,7 @@ public class LibManagementSystemApplication {
                             email(ADMIN_EMAIL).password(passwordEncoder.encode(ADMIN_PASSWORD)).
                             userRole(UserRole.ADMIN).userEnabled(true).build();
 
-            bookRepo.save(someBook);
+            bookRepo.saveAll(listOfDefaultBooks);
             userRepo.save(admin);
         };
     }

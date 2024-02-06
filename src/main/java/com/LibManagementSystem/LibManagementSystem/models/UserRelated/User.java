@@ -27,8 +27,8 @@ public class User implements UserDetails {
     @Column(unique = true, nullable = false)
     private String email;
 
-
-    private boolean userEnabled;
+    @Column(nullable = false)
+    private boolean userEnabled = false;
 
     @Column(nullable = false)
     private String firstName;
@@ -65,13 +65,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-//        if (this.userEnabled == true) {
-//
-//            return true;
-//        }
-//        if (this.userEnabled == false) {
-//            return false;
-//        }
+
         return this.userEnabled;
 
     }
@@ -83,13 +77,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-//        if (this.userEnabled == true) {
-//
-//            return true;
-//        }
-//        if (this.userEnabled == false) {
-//            return false;
-//        }
+
         return this.userEnabled;
     }
 }

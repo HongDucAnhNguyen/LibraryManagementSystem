@@ -29,18 +29,25 @@ public class CirculationService {
     private final BookRepo bookRepo;
     private final borrowedStatusRepo issueEntryRepo;
 
-    public List<BookResponse> getAllBooksService() {
+    public List<BookResponse> getAllBooksService(int page, int offSet) {
         List<Book> allBooks = bookRepo.findAll();
-        List<BookResponse> allBooksResponse = new ArrayList<>();
-        allBooks.forEach(book -> {
+        List<BookResponse> booksThisPageRes = new ArrayList<>();
+        int startIndex = (page - 1) * offSet;
+        int endIndex = startIndex + offSet;
+
+        List<Book> booksThisPage = allBooks.subList(startIndex, endIndex);
+        //up to but not including endIndex --> startIndex <= x < endIndex
+
+
+        booksThisPage.forEach(book -> {
             BookResponse bookResponse = BookResponse.builder().bookAuthor(book.getBookAuthor()).bookGenre(book.getBookGenre())
                     .bookISBN(book.getBookISBN()).bookName(book.getBookName()).publishedYear(book.getPublishedYear())
                     .bookStatus(book.getBookStatus()).build();
-            allBooksResponse.add(bookResponse);
+            booksThisPageRes.add(bookResponse);
 
         });
 
-        return allBooksResponse;
+        return booksThisPageRes;
 
     }
 
@@ -57,17 +64,14 @@ public class CirculationService {
     public BookResponse borrowBookService(Integer bookId) {
 
 
-
-
         Book bookFound = bookRepo.findById(bookId).orElseThrow();
 
 
-        if(bookFound.getBookStatus().equals(BookStatus.BORROWED)){
+        if (bookFound.getBookStatus().equals(BookStatus.BORROWED)) {
 
             return BookResponse.builder().responseMessage("book is already borrowed").build();
 
         }
-
 
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -112,7 +116,10 @@ public class CirculationService {
                 issueEntryFound.setReturnedTimeStamp(currentDate);
                 issueEntryFound.setReturnOverdue(true);
 
+                //set overdue balance for user?
+
             }
+
             bookFound.setBookStatus(BookStatus.AVAILABLE);
 
 

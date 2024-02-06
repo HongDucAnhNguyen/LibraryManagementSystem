@@ -29,7 +29,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> {
                             //permit auth routes
                             auth.requestMatchers(
-                                    new AntPathRequestMatcher("/api/v1/auth/**")
+                                    new AntPathRequestMatcher("/api/v1/auth/**"),
+                                    new AntPathRequestMatcher("/api/v1/books")
                             ).permitAll();
 
 
@@ -40,6 +41,9 @@ public class SecurityConfig {
 
                             auth.requestMatchers(new AntPathRequestMatcher("/api/v1/user/**")).
                                     hasAnyRole(UserRole.ADMIN.name(), UserRole.USER.name());
+
+
+
                             auth.anyRequest().authenticated();
 
                         }

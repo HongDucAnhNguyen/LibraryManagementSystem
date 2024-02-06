@@ -18,9 +18,14 @@ public class CirculationController {
     private final CirculationService circulationService;
 
 
-    @GetMapping(path = "/")
-    public ResponseEntity<List<BookResponse>> getAllBooks(){
-        return ResponseEntity.ok(circulationService.getAllBooksService());
+
+    @GetMapping()
+    public ResponseEntity<List<BookResponse>> getAllBooks(
+
+            @RequestParam(name = "page", defaultValue = "1") int page
+
+    ){
+        return ResponseEntity.ok(circulationService.getAllBooksService(page, 3));
     }
 
 
