@@ -33,19 +33,27 @@ public class CirculationService {
         List<Book> allBooks = bookRepo.findAll();
         List<BookResponse> booksThisPageRes = new ArrayList<>();
         int startIndex = (page - 1) * offSet;
-        int endIndex = startIndex + offSet;
-
-        List<Book> booksThisPage = allBooks.subList(startIndex, endIndex);
-        //up to but not including endIndex --> startIndex <= x < endIndex
+        int endIndex = Math.min(startIndex + offSet, allBooks.size());
 
 
-        booksThisPage.forEach(book -> {
-            BookResponse bookResponse = BookResponse.builder().bookAuthor(book.getBookAuthor()).bookGenre(book.getBookGenre())
-                    .bookISBN(book.getBookISBN()).bookName(book.getBookName()).publishedYear(book.getPublishedYear())
-                    .bookStatus(book.getBookStatus()).build();
-            booksThisPageRes.add(bookResponse);
+        if (startIndex >= allBooks.size()) {
+            return booksThisPageRes; // Return empty list if startIndex exceeds size
+        }
 
-        });
+    List<Book> booksThisPage = allBooks.subList(startIndex, endIndex);
+    //up to but not including endIndex --> startIndex <= x < endIndex
+    booksThisPage.forEach(book -> {
+        BookResponse bookResponse = BookResponse.builder().bookAuthor(book.getBookAuthor()).bookGenre(book.getBookGenre())
+                .bookISBN(book.getBookISBN()).bookName(book.getBookName()).publishedYear(book.getPublishedYear())
+                .bookStatus(book.getBookStatus()).build();
+        booksThisPageRes.add(bookResponse);
+
+    });
+
+
+
+
+
 
         return booksThisPageRes;
 

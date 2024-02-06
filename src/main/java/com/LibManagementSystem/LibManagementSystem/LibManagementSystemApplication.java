@@ -62,7 +62,7 @@ public class LibManagementSystemApplication {
 
 
             //page 2
-            Book someBook4= Book.builder().
+            Book someBook4 = Book.builder().
                     bookStatus(BookStatus.AVAILABLE).bookGenre("thriller")
                     .bookAuthor("john doe").bookISBN("123324132").publishedYear(1980)
                     .bookName("adventures of timmy").
@@ -77,6 +77,22 @@ public class LibManagementSystemApplication {
                     .bookAuthor("john doe").bookISBN("346256547346").publishedYear(1980)
                     .bookName("adventures of timmy").
                     build();
+//page 3
+            Book someBook7 = Book.builder().
+                    bookStatus(BookStatus.AVAILABLE).bookGenre("thriller")
+                    .bookAuthor("john doe").bookISBN("dfdfdcsafas").publishedYear(1980)
+                    .bookName("adventures of timmy").
+                    build();
+            Book someBook8 = Book.builder().
+                    bookStatus(BookStatus.AVAILABLE).bookGenre("thriller")
+                    .bookAuthor("john doe").bookISBN("ssssss").publishedYear(1980)
+                    .bookName("adventures of timmy").
+                    build();
+            Book someBook9 = Book.builder().
+                    bookStatus(BookStatus.AVAILABLE).bookGenre("thriller")
+                    .bookAuthor("john doe").bookISBN("asgasfg").publishedYear(1980)
+                    .bookName("adventures of timmy").
+                    build();
 
             listOfDefaultBooks.add(someBook);
             listOfDefaultBooks.add(someBook2);
@@ -84,6 +100,9 @@ public class LibManagementSystemApplication {
             listOfDefaultBooks.add(someBook4);
             listOfDefaultBooks.add(someBook5);
             listOfDefaultBooks.add(someBook6);
+            listOfDefaultBooks.add(someBook7);
+            listOfDefaultBooks.add(someBook8);
+            listOfDefaultBooks.add(someBook9);
 
 
             User admin =
